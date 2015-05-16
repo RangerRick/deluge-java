@@ -1,11 +1,15 @@
 package com.raccoonfink.deluge;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class DelugeEvent {
 
 	public DelugeEvent(final JSONArray data) {
-		// TODO Auto-generated constructor stub
+	}
+
+	public JSONObject toJSON() {
+		return new JSONObject();
 	}
 
 }

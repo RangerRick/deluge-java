@@ -1,5 +1,6 @@
 package com.raccoonfink.deluge;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Statistics {
@@ -62,5 +63,21 @@ public class Statistics {
 	}
 	public int getUploadRate() {
 		return m_uploadRate;
+	}
+
+	public JSONObject toJSON() throws JSONException {
+		final JSONObject ret = new JSONObject();
+		ret.put("dht_nodes", m_dhtNodes);
+		ret.put("download_protocol_rate", m_downloadProtocolRate);
+		ret.put("download_rate", m_downloadRate);
+		ret.put("free_space", m_freeSpace);
+		ret.put("incoming_connections", m_incomingConnections);
+		ret.put("max_download", m_maxDownload);
+		ret.put("max_num_connections", m_maxNumConnections);
+		ret.put("max_upload", m_maxUpload);
+		ret.put("num_connections", m_numConnections);
+		ret.put("upload_protocol_rate", m_uploadProtocolRate);
+		ret.put("upload_rate", m_uploadRate);
+		return ret;
 	}
 }

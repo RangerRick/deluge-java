@@ -1,5 +1,6 @@
 package com.raccoonfink.deluge.responses;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.raccoonfink.deluge.DelugeException;
@@ -19,5 +20,12 @@ public class CheckSessionResponse extends DelugeResponse {
 
 	public boolean isSessionActive() {
 		return m_sessionActive;
+	}
+
+	@Override
+	public JSONObject toResponseJSON() throws JSONException {
+		final JSONObject ret = super.toResponseJSON();
+		ret.put("result", isSessionActive());
+		return ret;
 	}
 }

@@ -38,4 +38,12 @@ public class HostResponse extends DelugeResponse {
 		return new Host(host.getString(0), host.getString(1), host.getInt(2), host.getString(3), host.optString(4));
 	}
 
+	@Override
+	public JSONObject toResponseJSON() throws JSONException {
+		final JSONObject ret = super.toResponseJSON();
+		for (final Host host : m_hosts) {
+			ret.append("result", host.toJSON());
+		}
+		return ret;
+	}
 }

@@ -34,4 +34,12 @@ public class DelugeResponse {
 	public JSONObject getResponseData() {
 		return m_result;
 	}
+
+	public JSONObject toResponseJSON() throws JSONException {
+		final JSONObject ret = new JSONObject();
+		ret.put("id", getId());
+		ret.put("responseCode", getResponseCode());
+		ret.put("result", JSONObject.NULL);
+		return ret;
+	}
 }

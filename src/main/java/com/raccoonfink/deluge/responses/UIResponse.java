@@ -55,4 +55,17 @@ public class UIResponse extends DelugeResponse {
 	public Set<Torrent> getTorrents() {
 		return m_torrents;
 	}
+
+	@Override
+	public JSONObject toResponseJSON() throws JSONException {
+		final JSONObject ret = super.toResponseJSON();
+		ret.put("connected", m_connected);
+		ret.put("statistics", m_statistics.toJSON());
+		final JSONObject torrents = new JSONObject();
+		ret.put("torrents", torrents);
+		for (final Torrent torrent : m_torrents) {
+			torrents.put(torrent.getKey(), torrent.toJSON());
+		}
+		return ret;
+	}
 }

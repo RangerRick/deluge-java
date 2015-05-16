@@ -1,5 +1,6 @@
 package com.raccoonfink.deluge;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Torrent implements Comparable<Torrent> {
@@ -172,6 +173,35 @@ public class Torrent implements Comparable<Torrent> {
 
 	public int compareTo(final Torrent torrent) {
 		return this.getName().compareTo(torrent.getName());
+	}
+
+	public JSONObject toJSON() throws JSONException {
+		final JSONObject ret = new JSONObject();
+		ret.put("key", m_key);
+		ret.put("distributed_copies", m_distributedCopies);
+		ret.put("download_payload_rate", m_downloadPayloadRate);
+		ret.put("eta", m_eta);
+		ret.put("auto_managed", m_autoManaged);
+		ret.put("max_download_speed", m_maxDownloadSpeed);
+		ret.put("max_upload_speed", m_maxUploadSpeed);
+		ret.put("name", m_name);
+		ret.put("num_peers", m_numPeers);
+		ret.put("num_seeds", m_numSeeds);
+		ret.put("progress", m_progress);
+		ret.put("queue", m_queue);
+		ret.put("ratio", m_ratio);
+		ret.put("save_path", m_savePath);
+		ret.put("seeds_peer_ratio", m_seedsPeerRatio);
+		ret.put("time_added", m_timeAdded);
+		ret.put("total_done", m_totalDone);
+		ret.put("total_peers", m_totalPeers);
+		ret.put("total_seeds", m_totalSeeds);
+		ret.put("total_size", m_totalSize);
+		ret.put("total_uploaded", m_totalUploaded);
+		ret.put("tracker_host", m_trackerHost);
+		ret.put("upload_payload_rate", m_uploadPayloadRate);
+		ret.put("state", m_state);
+		return ret;
 	}
 
 }

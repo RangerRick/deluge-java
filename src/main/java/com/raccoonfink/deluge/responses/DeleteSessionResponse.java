@@ -1,5 +1,6 @@
 package com.raccoonfink.deluge.responses;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.raccoonfink.deluge.DelugeException;
@@ -19,5 +20,12 @@ public class DeleteSessionResponse extends DelugeResponse {
 
 	public boolean isSessionDeleted() {
 		return m_sessionDeleted;
+	}
+
+	@Override
+	public JSONObject toResponseJSON() throws JSONException {
+		final JSONObject ret = super.toResponseJSON();
+		ret.put("result", isSessionDeleted());
+		return ret;
 	}
 }

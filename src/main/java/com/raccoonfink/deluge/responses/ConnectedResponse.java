@@ -22,8 +22,15 @@ public class ConnectedResponse extends DelugeResponse {
 		m_connected = isConnected;
 	}
 
-	public boolean isConnected() throws DelugeException {
+	public boolean isConnected() {
 		return m_connected;
 	}
 
+
+	@Override
+	public JSONObject toResponseJSON() throws JSONException {
+		final JSONObject ret = super.toResponseJSON();
+		ret.put("result", isConnected());
+		return ret;
+	}
 }

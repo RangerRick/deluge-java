@@ -1,5 +1,8 @@
 package com.raccoonfink.deluge;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Host {
 	public static enum Status {
 		Offline,
@@ -39,5 +42,14 @@ public class Host {
 
 	public String getVersion() {
 		return m_version;
+	}
+
+	public JSONObject toJSON() throws JSONException {
+		final JSONObject ret = new JSONObject();
+		ret.put("id", m_id);
+		ret.put("hostname", m_hostname);
+		ret.put("status", m_status);
+		ret.putOpt("version", m_version);
+		return ret;
 	}
 }

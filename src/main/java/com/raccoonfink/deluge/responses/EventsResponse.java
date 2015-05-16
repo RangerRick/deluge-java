@@ -32,4 +32,13 @@ public class EventsResponse extends DelugeResponse {
 	public List<DelugeEvent> getEvents() {
 		return Collections.unmodifiableList(m_events);
 	}
+
+	@Override
+	public JSONObject toResponseJSON() throws JSONException {
+		final JSONObject ret = super.toResponseJSON();
+		for (final DelugeEvent ev : m_events) {
+			ret.append("result", ev.toJSON());
+		}
+		return ret;
+	}
 }

@@ -1,5 +1,6 @@
 package com.raccoonfink.deluge.responses;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.raccoonfink.deluge.DelugeException;
@@ -17,8 +18,14 @@ public class LoginResponse extends DelugeResponse {
 		}
 	}
 
-	public boolean isLoggedIn() throws DelugeException {
+	public boolean isLoggedIn() {
 		return m_loggedIn;
 	}
 
+	@Override
+	public JSONObject toResponseJSON() throws JSONException {
+		final JSONObject ret = super.toResponseJSON();
+		ret.put("result", isLoggedIn());
+		return ret;
+	}
 }
