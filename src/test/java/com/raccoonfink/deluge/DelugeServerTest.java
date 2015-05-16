@@ -17,9 +17,9 @@ import com.raccoonfink.deluge.responses.LoginResponse;
 import com.raccoonfink.deluge.responses.UIResponse;
 
 public class DelugeServerTest {
-	private static final String DELUGE_JSON_URL = "http://defiance.dyndns.org:8112/";
-	private static final String DELUGE_PASSWORD = "kaly8wha8xyf";
-	private static final String DELUGE_HOST_HASH = "1cc7ee2e2259ad6c29430b2f5ae75919009ec4da";
+	private static final String DELUGE_JSON_URL = System.getProperty("delugeJsonUrl", "http://defiance.dyndns.org:8112/");
+	private static final String DELUGE_PASSWORD = System.getProperty("delugePassword");
+	private static final String DELUGE_HOST_HASH = System.getProperty("delugeHostHash", "1cc7ee2e2259ad6c29430b2f5ae75919009ec4da");
 
 	/* Attempt to reset the connection/environment state before any tests run. */
 	@Before
@@ -125,7 +125,7 @@ public class DelugeServerTest {
 		final DelugeServer server = new DelugeServer(DELUGE_JSON_URL, DELUGE_PASSWORD);
 		server.login();
 		final HostResponse response = server.getHostStatus(DELUGE_HOST_HASH);
-		final ConnectedResponse connResponse = server.connect(response.getHosts().get(0));
+		final ConnectedResponse connResponse = server.connect(response.getHosts().get(0).getId());
 		assertTrue(connResponse.isConnected());
 	}
 
@@ -134,7 +134,7 @@ public class DelugeServerTest {
 		final DelugeServer server = new DelugeServer(DELUGE_JSON_URL, DELUGE_PASSWORD);
 		server.login();
 		final HostResponse response = server.getHostStatus(DELUGE_HOST_HASH);
-		final ConnectedResponse connResponse = server.connect(response.getHosts().get(0));
+		final ConnectedResponse connResponse = server.connect(response.getHosts().get(0).getId());
 		assertTrue(connResponse.isConnected());
 		server.getEvents();
 	}
@@ -144,7 +144,7 @@ public class DelugeServerTest {
 		final DelugeServer server = new DelugeServer(DELUGE_JSON_URL, DELUGE_PASSWORD);
 		server.login();
 		final HostResponse response = server.getHostStatus(DELUGE_HOST_HASH);
-		final ConnectedResponse connResponse = server.connect(response.getHosts().get(0));
+		final ConnectedResponse connResponse = server.connect(response.getHosts().get(0).getId());
 		assertTrue(connResponse.isConnected());
 		final UIResponse uiResponse = server.updateUI();
 		assertTrue(uiResponse.isConnected());

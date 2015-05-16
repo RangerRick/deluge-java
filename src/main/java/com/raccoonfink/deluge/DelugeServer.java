@@ -255,8 +255,8 @@ public class DelugeServer {
 		return new HostResponse(response.getResponseCode(), response.getResponseData(), true);
 	}
 
-	public ConnectedResponse connect(final Host host) throws DelugeException {
-		final DelugeResponse response = makeRequest(new DelugeRequest("web.connect", host.getId()));
+	public ConnectedResponse connect(final String id) throws DelugeException {
+		final DelugeResponse response = makeRequest(new DelugeRequest("web.connect", id));
 		if (response.getResponseData().isNull("result")) {
 			return new ConnectedResponse(response.getResponseCode(), response.getResponseData(), true);
 		} else {
